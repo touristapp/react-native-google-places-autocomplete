@@ -26,25 +26,20 @@ const defaultStyles = {
   },
   textInputContainer: {
     backgroundColor: '#FFF',
-    height: 44,
-    borderTopColor: '#7e7e7e',
-    borderBottomColor: '#b5b5b5',
-    borderTopWidth: 1 / PixelRatio.get(),
-    borderBottomWidth: 1 / PixelRatio.get(),
+    height: 70,
     flexDirection: 'row',
   },
   textInput: {
-    backgroundColor: '#FFFFFF',
-    height: 28,
+    backgroundColor: '#FFF',
+    height: 60,
+    borderWidth: 1,
+    borderColor: 'grey',
     borderRadius: 5,
     paddingTop: 4.5,
     paddingBottom: 4.5,
     paddingLeft: 10,
     paddingRight: 10,
-    marginTop: 7.5,
-    marginLeft: 8,
-    marginRight: 8,
-    fontSize: 15,
+    fontSize: 17,
     flex: 1
   },
   poweredContainer: {
@@ -687,7 +682,7 @@ export default class GooglePlacesAutocomplete extends Component {
           ItemSeparatorComponent={this._renderSeparator}
           renderItem={({ item }) => this._renderRow(item)}
           ListHeaderComponent={this.props.renderHeaderComponent && this.props.renderHeaderComponent(this.state.text)}
-          ListFooterComponent={this._renderPoweredLogo}
+          //ListFooterComponent={this._renderPoweredLogo}
           {...this.props}
         />
       );
