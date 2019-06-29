@@ -25,7 +25,7 @@ const defaultStyles = {
     flex: 1,
   },
   textInputContainer: {
-    backgroundColor: '#C9C9CE',
+    backgroundColor: '#FFF',
     height: 44,
     borderTopColor: '#7e7e7e',
     borderBottomColor: '#b5b5b5',
@@ -509,7 +509,7 @@ export default class GooglePlacesAutocomplete extends Component {
       });
     }
   }
-  
+
   clearText(){
     this.setState({
       text: ""
