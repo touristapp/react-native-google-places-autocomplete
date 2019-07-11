@@ -297,6 +297,7 @@ export default class GooglePlacesAutocomplete extends Component {
 
       this.setState({
         text: this._renderDescription( rowData ),
+        touchCount: 0,
       });
 
       this.triggerBlur(); // hide keyboard but not the results
@@ -306,9 +307,10 @@ export default class GooglePlacesAutocomplete extends Component {
     } else {
       this.setState({
         text: this._renderDescription( rowData ),
+        touchCount: 0,
       });
-      this.setState({ touchCount: 0 });
-      this._onBlur();
+
+      //this._onBlur();
       delete rowData.isLoading;
       let predefinedPlace = this._getPredefinedPlace(rowData);
 
@@ -723,7 +725,6 @@ onChange
               onSubmitEditing={this.props.onSubmitEditing}
               placeholderTextColor={this.props.placeholderTextColor}
               onFocus={onFocus ? () => {this._onFocus(); onFocus()} : this._onFocus}
-              onBlur={this._onBlur}
               underlineColorAndroid={this.props.underlineColorAndroid}
               clearButtonMode={
                 clearButtonMode ? clearButtonMode : "while-editing"
