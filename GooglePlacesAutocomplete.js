@@ -51,7 +51,7 @@ const defaultStyles = {
   listView: {},
   row: {
     padding: 13,
-    height: 55,
+    height: 70,
     flexDirection: 'row',
   },
   separator: {
@@ -81,6 +81,7 @@ export default class GooglePlacesAutocomplete extends Component {
 
   getInitialState = () => ({
     text: this.props.getDefaultValue(),
+    touchCount: 0,
     dataSource: this.buildRowsFromResults([]),
     listViewDisplayed: this.props.listViewDisplayed === 'auto' ? false : this.props.listViewDisplayed,
   })
@@ -211,6 +212,7 @@ export default class GooglePlacesAutocomplete extends Component {
   }
 
   _onPress = (rowData) => {
+    this.setState({ touchCount: 2 });
     if (rowData.isPredefinedPlace !== true && this.props.fetchDetails === true) {
       if (rowData.isLoading === true) {
         // already requesting
@@ -305,7 +307,7 @@ export default class GooglePlacesAutocomplete extends Component {
       this.setState({
         text: this._renderDescription( rowData ),
       });
-
+      this.setState({ touchCount: 0 });
       this._onBlur();
       delete rowData.isLoading;
       let predefinedPlace = this._getPredefinedPlace(rowData);
@@ -332,6 +334,7 @@ export default class GooglePlacesAutocomplete extends Component {
     if (this._isMounted === true) {
       for (let i = 0; i < this._results.length; i++) {
         if (this._results[i].isLoading === true) {
+//CHANGES HERE : false -> true
           this._results[i].isLoading = false;
         }
       }
@@ -519,7 +522,7 @@ export default class GooglePlacesAutocomplete extends Component {
       listViewDisplayed: this._isMounted || this.props.autoFocus,
     });
   }
-
+onChange
   _handleChangeText = (text) => {
     this._onChangeText(text);
 
@@ -613,9 +616,11 @@ export default class GooglePlacesAutocomplete extends Component {
   _onBlur = () => {
     this.triggerBlur();
 
-    this.setState({
-      listViewDisplayed: false
-    });
+    if(this.state.touchCount>1) {
+      this.setState({
+         listViewDisplayed: false
+      });
+    }
   }
 
   _onFocus = () => this.setState({ listViewDisplayed: true })
